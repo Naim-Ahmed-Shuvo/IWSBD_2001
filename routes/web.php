@@ -63,3 +63,9 @@ Route::get('/', 'FrontendController@index');
 Route::get('shop', 'FrontendController@shop');
 Route::get('contact/us', 'FrontendController@Contact');
 Route::get('blog', 'FrontendController@Blog');
+
+
+// cat
+
+Route::post('add/to/cart', 'CartController@index');
+Route::get('cart/delete/{id}', 'CartController@delete_cart');

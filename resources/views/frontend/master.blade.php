@@ -21,6 +21,8 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{url('/')}}/frontend-assets/css/style.css">
 
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 </head>
 
 <body>
@@ -90,19 +92,23 @@
                                 <span class="cart_quantity">2</span>
                                 <!--mini cart-->
                                  <div class="mini_cart">
+
+                                    @foreach($carts as $item)
                                     <div class="cart_item">
                                        <div class="cart_img">
-                                           <a href="#"><img src="{{url('/')}}/frontend-assets/img/s-product/product.jpg" alt=""></a>
+                                           <a href="#"><img src="{{url($item->product_image)}}" alt=""></a>
                                        </div>
                                         <div class="cart_info">
-                                            <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                            <p>Qty: 1 X <span> $60.00 </span></p>    
+                                            <a href="#">{{$item->product_name}}</a>
+                                            <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>    
                                         </div>
                                         <div class="cart_remove">
                                             <a href="#"><i class="ion-android-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="cart_item">
+                                    @endforeach
+
+                                    <!-- <div class="cart_item">
                                        <div class="cart_img">
                                            <a href="#"><img src="{{url('/')}}/frontend-assets/img/s-product/product2.jpg" alt=""></a>
                                        </div>
@@ -113,7 +119,7 @@
                                         <div class="cart_remove">
                                             <a href="#"><i class="ion-android-close"></i></a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="mini_cart_table">
                                         <div class="cart_total">
                                             <span>Sub total:</span>
@@ -296,24 +302,33 @@
                                         <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                         <span class="wishlist_quantity">3</span>
                                     </div>
+
+                                    @php
+                                       $amount = 0;
+                                       foreach($carts as $item){
+                                              $amount = $amount+($item->price*$item->quantity);
+                                         }
+                                    @endphp
                                     <div class="mini_cart_wrapper">
-                                        <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
-                                        <span class="cart_quantity">2</span>
+                                        <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{$amount}} <i class="fa fa-angle-down"></i></a>
+                                        <span class="cart_quantity">{{$cart_products_numbers}}</span>
                                         <!--mini cart-->
                                          <div class="mini_cart">
-                                            <div class="cart_item">
-                                               <div class="cart_img">
-                                                   <a href="#"><img src="{{url('/')}}/frontend-assets/img/s-product/product.jpg" alt=""></a>
-                                               </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                                    <p>Qty: 1 X <span> $60.00 </span></p>    
+                                             @foreach($carts as $item)
+                                                <div class="cart_item">
+                                                   <div class="cart_img">
+                                                       <a href="#"><img src="{{url($item->product_image)}}" alt=""></a>
+                                                   </div>
+                                                    <div class="cart_info">
+                                                        <a href="#">{{$item->product_name}}</a>
+                                                        <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>    
+                                                    </div>
+                                                    <div class="cart_remove">
+                                                        <a href="#"><i class="ion-android-close"></i></a>
+                                                    </div>
                                                 </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="ion-android-close"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cart_item">
+                                            @endforeach
+                                            <!-- <div class="cart_item">
                                                <div class="cart_img">
                                                    <a href="#"><img src="{{url('/')}}/frontend-assets/img/s-product/product2.jpg" alt=""></a>
                                                </div>
@@ -324,15 +339,15 @@
                                                 <div class="cart_remove">
                                                     <a href="#"><i class="ion-android-close"></i></a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="mini_cart_table">
                                                 <div class="cart_total">
                                                     <span>Sub total:</span>
-                                                    <span class="price">$138.00</span>
+                                                    <span class="price">{{$amount}}/=</span>
                                                 </div>
                                                 <div class="cart_total mt-10">
                                                     <span>total:</span>
-                                                    <span class="price">$138.00</span>
+                                                    <span class="price">{{$amount}}/=</span>
                                                 </div>
                                             </div>
 
@@ -677,42 +692,34 @@
                                 <span class="wishlist_quantity">3</span>
                             </div>
                             <div class="mini_cart_wrapper">
-                                <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
-                                <span class="cart_quantity">2</span>
+                                <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{$amount}} <i class="fa fa-angle-down"></i></a>
+                                <span class="cart_quantity">{{$cart_products_numbers}}</span>
                                 <!--mini cart-->
                                  <div class="mini_cart">
+                                    @foreach($carts as $item)
                                     <div class="cart_item">
                                        <div class="cart_img">
-                                           <a href="#"><img src="{{url('/')}}/frontend-assets/img/s-product/product.jpg" alt=""></a>
+                                           <a href="#"><img src="{{url($item->product_image)}}" alt=""></a>
                                        </div>
                                         <div class="cart_info">
-                                            <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                            <p>Qty: 1 X <span> $60.00 </span></p>    
+                                            <a href="#">{{$item->product_name}}</a>
+                                            <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>    
                                         </div>
                                         <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
+                                            <a href="{{url('cart/delete')}}/{{$item->id}}"><i class="ion-android-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="cart_item">
-                                       <div class="cart_img">
-                                           <a href="#"><img src="{{url('/')}}/frontend-assets/img/s-product/product2.jpg" alt=""></a>
-                                       </div>
-                                        <div class="cart_info">
-                                            <a href="#">Natus erro at congue massa commodo</a>
-                                            <p>Qty: 1 X <span> $60.00 </span></p>   
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
+
+                                    @endforeach
+                                    
                                     <div class="mini_cart_table">
                                         <div class="cart_total">
                                             <span>Sub total:</span>
-                                            <span class="price">$138.00</span>
+                                            <span class="price">{{$amount}}/=</span>
                                         </div>
                                         <div class="cart_total mt-10">
                                             <span>total:</span>
-                                            <span class="price">$138.00</span>
+                                            <span class="price">{{$amount}}/=</span>
                                         </div>
                                     </div>
 
@@ -971,7 +978,7 @@
     <!-- modal area end-->
     
     <!--news letter popup start-->
-     <div class="newletter-popup">
+    <!--  <div class="newletter-popup">
         <div id="boxes" class="newletter-container">
             <div id="dialog" class="window">
                 <div id="popup2">
@@ -1004,7 +1011,7 @@
 
         </div>
         <!-- /.box -->
-    </div>
+    </div> -->
     <!--news letter popup start-->
 
 <!-- JS
@@ -1016,6 +1023,7 @@
 <!-- Main JS -->
 <script src="{{url('/')}}/frontend-assets/js/main.js"></script>
 
-
+ <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
 
 </body>

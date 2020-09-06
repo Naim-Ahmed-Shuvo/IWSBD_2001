@@ -1452,7 +1452,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .mini_cart_table {
-  padding: 23px 0;
+  padding: 10px 0;
 }
 
 .cart_total {
@@ -1490,7 +1490,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-align: center;
   line-height: 20px;
   margin-bottom: 0;
-  padding: 13px 0px 11px;
+  padding: 9px 0px 7px;
   border: 1px solid #ebebeb;
 }
 .cart_button a:hover {
@@ -2962,6 +2962,26 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #ffffff;
   border-radius: 5px;
 }
+
+.btn-this button{
+  line-height: 16px;
+  text-align: center;
+  font-size: 12px;
+  padding: 12px 40px;
+  left: 30;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.5s ease;
+  background: #0063d1;
+  color: #ffffff;
+  border-radius: 5px;
+  /*display: block;*/
+}
+/*.btn-this button:hover {
+  background: #1953b4;
+}*/
+
 .add_to_cart a:hover {
   background: #1953b4;
 }
@@ -3282,10 +3302,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  top: 50%;
+  top: 67;
   transform: translatey(-50%);
-  left: -35px;
-  font-size: 40px;
+  left: 145px;
+  font-size: 20px;
   border: 0;
   -webkit-transition: 0.3s;
   transition: 0.3s;
