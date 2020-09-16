@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Route::get('/', function () {
-    
+
 
 //     return view('welcome');
-    
+
 // });
 
 Auth::routes();
@@ -65,7 +65,8 @@ Route::get('contact/us', 'FrontendController@Contact');
 Route::get('blog', 'FrontendController@Blog');
 
 
-// cat
+// cart
 
 Route::post('add/to/cart', 'CartController@index');
 Route::get('cart/delete/{id}', 'CartController@delete_cart');
+Route::get('view/cart', 'CartController@view_cart');

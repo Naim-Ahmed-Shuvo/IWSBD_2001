@@ -11,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/frontend-assets/img/favicon.ico">
-    
-    <!-- CSS 
+
+    <!-- CSS
     ========================= -->
 
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="{{url('/')}}/frontend-assets/css/plugins.css">
-    
+
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{url('/')}}/frontend-assets/css/style.css">
 
@@ -26,12 +26,12 @@
 </head>
 
 <body>
-   
+
     <!--header area start-->
-    
+
     <!--Offcanvas menu area start-->
     <div class="off_canvars_overlay">
-                
+
     </div>
     <div class="Offcanvas_menu">
         <div class="container">
@@ -42,17 +42,17 @@
                     </div>
                     <div class="Offcanvas_menu_wrapper">
                         <div class="canvas_close">
-                              <a href="javascript:void(0)"><i class="ion-android-close"></i></a>  
+                              <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                         </div>
                         <div class="support_info">
                             <p>Telephone Enquiry: <a href="tel:+6494461709">(012) 800 456 789 – 987</a></p>
                         </div>
                         <div class="top_right text-right">
                             <ul>
-                               <li><a href="my-account.html"> My Account </a></li> 
-                               <li><a href="checkout.html"> Checkout </a></li> 
+                               <li><a href="my-account.html"> My Account </a></li>
+                               <li><a href="checkout.html"> Checkout </a></li>
                             </ul>
-                        </div> 
+                        </div>
                         <div class="search_container">
                            <form action="#">
                                <div class="hover_category">
@@ -73,15 +73,15 @@
                                         <option value="14">Laptops & Desktops</option>
                                         <option value="15">Watchs</option>
                                         <option value="16">Electronic</option>
-                                    </select>                        
+                                    </select>
                                </div>
                                 <div class="search_box">
                                     <input placeholder="Search product..." type="text">
-                                    <button type="submit">Search</button> 
+                                    <button type="submit">Search</button>
                                 </div>
                             </form>
-                        </div> 
-                        
+                        </div>
+
                         <div class="middel_right_info">
                             <div class="header_wishlist">
                                 <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
@@ -100,7 +100,7 @@
                                        </div>
                                         <div class="cart_info">
                                             <a href="#">{{$item->product_name}}</a>
-                                            <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>    
+                                            <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>
                                         </div>
                                         <div class="cart_remove">
                                             <a href="#"><i class="ion-android-close"></i></a>
@@ -114,7 +114,7 @@
                                        </div>
                                         <div class="cart_info">
                                             <a href="#">Natus erro at congue massa commodo</a>
-                                            <p>Qty: 1 X <span> $60.00 </span></p>   
+                                            <p>Qty: 1 X <span> $60.00 </span></p>
                                         </div>
                                         <div class="cart_remove">
                                             <a href="#"><i class="ion-android-close"></i></a>
@@ -130,7 +130,7 @@
                                             <span class="price">$138.00</span>
                                         </div>
                                     </div>
-                                       
+
                                     <div class="mini_cart_footer">
                                        <div class="cart_button">
                                             <a href="cart.html">View cart</a>
@@ -152,7 +152,7 @@
                                     <ul class="sub-menu">
                                         <li><a href="index.html">Home 1</a></li>
                                         <li><a href="index-2.html">Home 2</a></li>
-       
+
                                         <li><a href="index-3.html">Home 3</a></li>
                                         <li><a href="index-4.html">Home 4</a></li>
                                         <li><a href="index-5.html">Home 5</a></li>
@@ -225,7 +225,7 @@
                                     <a href="about.html">about Us</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="{{url('contact/us')}}"> Contact Us</a> 
+                                    <a href="{{url('contact/us')}}"> Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -246,12 +246,12 @@
         </div>
     </div>
     <!--Offcanvas menu area end-->
-    
+
     <header>
         <div class="main_header">
             <!--header top start-->
             <div class="header_top">
-                <div class="container">  
+                <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <div class="support_info">
@@ -261,10 +261,10 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="top_right text-right">
                                 <ul>
-                                   <li><a href="my-account.html"> My Account </a></li> 
-                                   <li><a href="checkout.html"> Checkout </a></li> 
+                                   <li><a href="my-account.html"> My Account </a></li>
+                                   <li><a href="checkout.html"> Checkout </a></li>
                                 </ul>
-                            </div>   
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -286,14 +286,14 @@
                                        <div class="hover_category">
                                             <select class="select_option" name="select" id="categori1">
                                                 <option selected value="1">All Categories</option>
-                                                
+
                                                @foreach($categories as $category)
                                                <option  value="{{$category->id}}">{{$category->category_name}}</option>
-                                               @endforeach 
+                                               @endforeach
                                        </div>
                                         <div class="search_box">
                                             <input placeholder="Search product..." type="text">
-                                            <button type="submit">Search</button> 
+                                            <button type="submit">Search</button>
                                         </div>
                                     </form>
                                 </div>
@@ -321,7 +321,7 @@
                                                    </div>
                                                     <div class="cart_info">
                                                         <a href="#">{{$item->product_name}}</a>
-                                                        <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>    
+                                                        <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>
                                                     </div>
                                                     <div class="cart_remove">
                                                         <a href="#"><i class="ion-android-close"></i></a>
@@ -334,7 +334,7 @@
                                                </div>
                                                 <div class="cart_info">
                                                     <a href="#">Natus erro at congue massa commodo</a>
-                                                    <p>Qty: 1 X <span> $60.00 </span></p>   
+                                                    <p>Qty: 1 X <span> $60.00 </span></p>
                                                 </div>
                                                 <div class="cart_remove">
                                                     <a href="#"><i class="ion-android-close"></i></a>
@@ -494,7 +494,7 @@
                                         <li id="cat_toggle" class="has-sub"><a href="#"> More Categories</a>
                                             <ul class="categorie_sub">
                                                 <li><a href="#">Hide Categories</a></li>
-                                            </ul>   
+                                            </ul>
 
                                         </li>
                                     </ul>
@@ -502,8 +502,8 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-12">
-                            <div class="main_menu menu_position"> 
-                                <nav>  
+                            <div class="main_menu menu_position">
+                                <nav>
                                     <ul>
                                         <li><a class="active"  href="{{url('/')}}">home<i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu">
@@ -514,7 +514,7 @@
                                                 <li><a href="index-5.html">Home shop 5</a></li>
                                             </ul>
                                         </li>
-                                        <li class="mega_items"><a href="{{ url('shop') }}">shop<i class="fa fa-angle-down"></i></a> 
+                                        <li class="mega_items"><a href="{{ url('shop') }}">shop<i class="fa fa-angle-down"></i></a>
                                             <div class="mega_menu">
                                                 <ul class="mega_menu_inner">
                                                     <li><a href="#">Shop Layouts</a>
@@ -581,18 +581,18 @@
 
                                         <li><a href="about.html">about Us</a></li>
                                         <li><a href="{{url('contact/us')}}"> Contact Us</a></li>
-                                    </ul>  
-                                </nav> 
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!--header bottom end-->
-        </div> 
+        </div>
     </header>
     <!--header area end-->
-    
+
     <!--sticky header area start-->
     <div class="sticky_header_area sticky-header">
         <div class="container">
@@ -604,8 +604,8 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="sticky_header_right menu_position">
-                        <div class="main_menu"> 
-                            <nav>  
+                        <div class="main_menu">
+                            <nav>
                                 <ul>
                                     <li><a class="active"  href="index.html">home<i class="fa fa-angle-down"></i></a>
                                         <ul class="sub_menu">
@@ -616,7 +616,7 @@
                                             <li><a href="index-5.html">Home shop 5</a></li>
                                         </ul>
                                     </li>
-                                    <li class="mega_items"><a href="shop.html">shop<i class="fa fa-angle-down"></i></a> 
+                                    <li class="mega_items"><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
                                         <div class="mega_menu">
                                             <ul class="mega_menu_inner">
                                                 <li><a href="#">Shop Layouts</a>
@@ -683,8 +683,8 @@
 
                                     <li><a href="about.html">about Us</a></li>
                                     <li><a href="{{url('contact/us')}}"> Contact Us</a></li>
-                                </ul>  
-                            </nav> 
+                                </ul>
+                            </nav>
                         </div>
                         <div class="middel_right_info">
                             <div class="header_wishlist">
@@ -703,7 +703,7 @@
                                        </div>
                                         <div class="cart_info">
                                             <a href="#">{{$item->product_name}}</a>
-                                            <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>    
+                                            <p>Qty: {{$item->quantity}} X <span> {{$item->price}}/= </span></p>
                                         </div>
                                         <div class="cart_remove">
                                             <a href="{{url('cart/delete')}}/{{$item->id}}"><i class="ion-android-close"></i></a>
@@ -711,7 +711,7 @@
                                     </div>
 
                                     @endforeach
-                                    
+
                                     <div class="mini_cart_table">
                                         <div class="cart_total">
                                             <span>Sub total:</span>
@@ -725,7 +725,7 @@
 
                                     <div class="mini_cart_footer">
                                        <div class="cart_button">
-                                            <a href="cart.html">View cart</a>
+                                            <a href="{{url('view/cart')}}">View cart</a>
                                         </div>
                                         <div class="cart_button">
                                             <a href="checkout.html">Checkout</a>
@@ -746,7 +746,7 @@
 
      <!--breadcrumbs area start-->
      <div class="breadcrumbs_area">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -757,7 +757,7 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <!--breadcrumbs area end-->
 
@@ -777,7 +777,7 @@
                             <a href="#"><img src="{{url('/')}}/frontend-assets/img/logo/logo.png" alt=""></a>
                         </div>
                         <div class="footer_contact">
-                            <p>We are a team of designers and developers that 
+                            <p>We are a team of designers and developers that
                                 create high quality HTML Template, Woocommerce, Shopify Theme.</p>
                             <p><span>Address</span> The Barn, Ullenhall, Henley in Arden B578 5C, England.</p>
                             <p><span>Mobile: </span><a href="tel:+123.456.789">+123.456.789</a>  – <a href="tel:+123.456.678">+123.456.678</a> </p>
@@ -860,10 +860,10 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
     </footer>
     <!--footer area end-->
-   
+
     <!-- modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -875,30 +875,30 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 col-md-5 col-sm-12">
-                                <div class="modal_tab">  
+                                <div class="modal_tab">
                                     <div class="tab-content product-details-large">
                                         <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product1.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product1.jpg" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab2" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product2.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product2.jpg" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab3" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product3.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product3.jpg" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab4" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product5.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{url('/')}}/frontend-assets/img/product/product5.jpg" alt=""></a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal_tab_button">    
+                                    <div class="modal_tab_button">
                                         <ul class="nav product_navactive owl-carousel" role="tablist">
                                             <li >
                                                 <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="{{url('/')}}/frontend-assets/img/product/product1.jpg" alt=""></a>
@@ -914,21 +914,21 @@
                                             </li>
 
                                         </ul>
-                                    </div>    
-                                </div>  
-                            </div> 
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-7 col-md-7 col-sm-12">
                                 <div class="modal_right">
                                     <div class="modal_title mb-10">
-                                        <h2>Handbag feugiat</h2> 
+                                        <h2>Handbag feugiat</h2>
                                     </div>
                                     <div class="modal_price mb-10">
-                                        <span class="new_price">$64.99</span>    
-                                        <span class="old_price" >$78.99</span>    
+                                        <span class="new_price">$64.99</span>
+                                        <span class="old_price" >$78.99</span>
                                     </div>
                                     <div class="modal_description mb-15">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>    
-                                    </div> 
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>
+                                    </div>
                                     <div class="variants_selects">
                                         <div class="variants_size">
                                            <h2>size</h2>
@@ -955,7 +955,7 @@
                                                 <input min="0" max="100" step="2" value="1" type="number">
                                                 <button type="submit">add to cart</button>
                                             </form>
-                                        </div>   
+                                        </div>
                                     </div>
                                     <div class="modal_social">
                                         <h2>Share this product</h2>
@@ -965,18 +965,18 @@
                                             <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
                                             <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                             <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>    
-                                    </div>      
-                                </div>    
-                            </div>    
-                        </div>     
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
     <!-- modal area end-->
-    
+
     <!--news letter popup start-->
     <!--  <div class="newletter-popup">
         <div id="boxes" class="newletter-container">
