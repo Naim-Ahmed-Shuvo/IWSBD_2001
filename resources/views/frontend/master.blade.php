@@ -353,10 +353,10 @@
 
                                             <div class="mini_cart_footer">
                                                <div class="cart_button">
-                                                    <a href="cart.html">View cart</a>
+                                               <a href="{{url('view/cart')}}">View cart</a>
                                                 </div>
                                                 <div class="cart_button">
-                                                    <a href="checkout.html">Checkout</a>
+                                                    <a href="{{url('proceed/checkout')}}">Checkout</a>
                                                 </div>
 
                                             </div>
@@ -728,7 +728,7 @@
                                             <a href="{{url('view/cart')}}">View cart</a>
                                         </div>
                                         <div class="cart_button">
-                                            <a href="checkout.html">Checkout</a>
+                                            <a href="{{url('proceed/checkout')}}">Checkout</a>
                                         </div>
 
                                     </div>
@@ -744,22 +744,7 @@
     </div>
     <!--sticky header area end-->
 
-     <!--breadcrumbs area start-->
-     <div class="breadcrumbs_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                        <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>blog</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--breadcrumbs area end-->
+
 
          @yield('content')
 

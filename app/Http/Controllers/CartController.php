@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use App\Product;
 use App\Cart;
+use App\Category3;
 use Carbon\Carbon;
 use Session;
+use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,7 @@ class CartController extends Controller
                 return back();
         	}
 
-                  
+
              else{
              	Cart::insert([
     		'random_number'=>session('random_number'),
@@ -39,9 +41,9 @@ class CartController extends Controller
              }
 
 
-        	
 
-    	
+
+
 
     	Toastr::success('product added to cart', 'success', ["positionClass" => "toast-top-right"]);
              return back();
@@ -50,7 +52,7 @@ class CartController extends Controller
         else{
         	$random_number = Str::random(10);
     	session(['random_number'=>$random_number]);
-    	
+
 
     	Cart::insert([
     		'random_number'=>session('random_number'),
@@ -65,6 +67,19 @@ class CartController extends Controller
              return back();
         }
     }
+   function view_cart(){
+    $categories = Category3::all();
+    $carts = DB::table('carts')
+    ->join('products', 'carts.product_id', '=', 'products.id')
+    ->select('carts.*', 'products.image as product_image', 'products.name as product_name')
+    ->where('random_number', session('random_number'))
+    ->orderBy('id', 'desc')
+    ->get();
+    $cart_products_numbers =Cart::where('random_number', session('random_number'))->count();
+
+       return view('frontend.cart', compact('carts', 'categories','cart_products_numbers'));
+   }
+
 
     public function delete_cart($id){
            Cart::where('id', $id)->delete();

@@ -70,3 +70,8 @@ Route::get('blog', 'FrontendController@Blog');
 Route::post('add/to/cart', 'CartController@index');
 Route::get('cart/delete/{id}', 'CartController@delete_cart');
 Route::get('view/cart', 'CartController@view_cart');
+
+
+// checkout
+Route::get('proceed/checkout', 'CheckoutController@proceedToCheckout');
+Route::post('place/the/order', 'CheckoutController@placetheOrder');

@@ -22,6 +22,7 @@ class CreateSalesTable extends Migration
             $table->string('discount')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('currency')->nullable();
+            $table->string('payment_type')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

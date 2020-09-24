@@ -1,7 +1,7 @@
 @extends("backend.master")
 
 @section('content')
- 
+
    <div class="container">
    	<div class="row">
    	   <div class="col-lg-5 mt-5" >
@@ -12,13 +12,13 @@
    	   		<div class="card-body bg-warning h-100">
    	   			<form action="{{url('new-sub/category')}}" method="POST">
    	   				@csrf
-                     
+
                      <div class="form-group">
                      	<label>Select Category</label>
                      <select name="category_id" class="form-control">
                      	    <option value="">Select One</option>
                          @foreach($categories as $category)
-                         
+
                      	<option value="{{$category->id}}">{{$category->category_name}}</option>
                      	@endforeach
                      </select>
@@ -50,13 +50,13 @@
    	   		</div>
    	   	</div>
 	  </div>
-		  
+
          <div class="col-lg-7">
 		     <div class="card mt-3">
               <div class="card-header bg-info text-white text-center">
                  <b>Categories View</b>
 
-              </div>    
+              </div>
               <div class="card-body">
                  <table class="table table-striped">
             <thead>
@@ -85,8 +85,8 @@
             </tbody>
             </table>
                   {{$subcategories->links()}}
-              </div>    
-          
+              </div>
+
            </div>
 		 </div>
 
