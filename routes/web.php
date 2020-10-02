@@ -75,3 +75,10 @@ Route::get('view/cart', 'CartController@view_cart');
 // checkout
 Route::get('proceed/checkout', 'CheckoutController@proceedToCheckout');
 Route::post('place/the/order', 'CheckoutController@placetheOrder');
+
+
+// stripe
+
+Route::get('stripe', 'StripePaymentController@stripe');
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
+// ->name('stripe.post')

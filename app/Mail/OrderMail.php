@@ -28,6 +28,6 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->view('frontend.send_email');
+        return $this->view('frontend.send_email', compact('order'));
     }
 }

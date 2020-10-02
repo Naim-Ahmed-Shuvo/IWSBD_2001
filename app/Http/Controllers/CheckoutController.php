@@ -1,101 +1,151 @@
 <?php
-
 namespace App\Http\Controllers;
+use App\Category3;
+use App\Product;
+use App\cart;
 
 use App\Billing;
-use App\Cart;
-use App\Category3;
-use App\Http\Controllers\middlware;
-use App\Sale;
-use App\Shipping;
-use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Brian2694\Toastr\Facades\Toastr;
 
+use App\Contact;
+use App\slider;
+use App\division;
+use App\district;
+use App\Sale;
+use App\upazila;
+use App\Shipping;
+
+use Illuminate\Http\Request;
 class CheckoutController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-
-    public function proceedToCheckout(){
-        $categories = Category3::all();
-
-        $carts = DB::table('carts')
-             ->join('products', 'carts.product_id', '=', 'products.id')
-             ->select('carts.*', 'products.image as product_image', 'products.name as product_name')
-             ->where('random_number', session('random_number'))
-             ->orderBy('id', 'desc')
-             ->get();
-
-
-        $cart_products_numbers =Cart::where('random_number', session('random_number'))->count();
-
-        return view('frontend.checkout', compact('categories', 'carts','cart_products_numbers'));
+    public function  proceedToCheckout(){
+        $categories= Category3::all();
+        $products=Product::orderBy('id','desc')->get();
+        // $data=division::all();
+        $carts=DB::table('carts')
+                  ->join('products','carts.product_id','=','products.id')
+                  ->select('carts.*','products.image as product_image','products.name as product_name')
+                  ->where('random_number',session('random_number'))
+                  ->orderBY('id','desc')
+                  ->get();
+          $cart_products_numbers=cart::where('random_number',session('random_number'))->count();
+        return view('frontend.checkout',compact('categories','products','carts','cart_products_numbers'));
     }
+    // public function districtBydivison($id){
+    //     $districts=district::where('division_id',$id)->get();
+    //     return response()->json($districts);
+    // }
+    // public function upazilaBydistrict($id){
+    //     $upazilas=upazila::where('district_id',$id)->get();
+    //     return response()->json($upazilas);
+    // }
+    public function placetheOrder(Request $request){
+            if($request->check_method=="Cash On Delivery"){
+                $shipping_id= Shipping::insertGetId([
+                    'name'=>$request->name,
+                    'user_id'=>Auth::user()->id,
+                    'email'=>$request->email,
+                    'contact'=>$request->contact,
+                    'address'=>$request->address,
 
-    public function placetheOrder(Request $req){
-        $shipping_id = Shipping::insertGetId([
-            'user_id'=> Auth::user()->id,
-            'name'=> $req->name,
-            'email'=> $req->email,
-            'contact'=> $req->contact,
-            'address'=> $req->address,
-            'country'=> $req->country,
-            'city'=> $req->city,
-            'shipping_date'=> $req->shipping_date,
-            'order_note'=> $req->order_note,
-            'created_at'=> Carbon::now(),
-        ]);
-
-
-
-
-        $sale_id = Sale::insert([
-          'shipping_id'=> $shipping_id,
-          'shipping_cost'=> 60,
-          'discount'=> 0,
-          'transaction_id'=> null,
-          'currency'=> "BDT",
-          'payment_type'=> "Cash On Delivery",
-          'status'=> 0,
-          'created_at'=> Carbon::now(),
-        ]);
-
-        $amount  = 0;
-        $carts = Cart::where('random_number', session('random_number'))->get();
-        foreach($carts as $item){
-            $amount = $amount  + ($item->quantity*$item->price);
-            Billing::insert([
-               'random_number' => session('random_number'),
-               'sale_id' => $sale_id,
-               'product_id' => $item->product_id,
-               'price' => $item->price,
-               'quantity' => $item->quantity,
-
+                    'shipping_date'=>$request->shipping_date,
+                    'order_note'=>$request->order_note,
+                    'created_at'=>Carbon::now(),
             ]);
-        }
-
-
-         Sale::where('id', $sale_id)->update([
-            'amount' => $amount+60,
-            'sub_total' => $amount,
-         ]);
-        $carts = Cart::where('random_number', session('random_number'))->delete();
-
-        $data = "Thanks for shopping";
-        // $email = Auth::user()->email;
-        $email = "shuvonaim123@gmail.com";
-        Mail::to($email)->send(new OrderMail($data));
-
-        Toastr::success('Order placed', 'success', ["positionClass" => "toast-top-right"]);
-        return redirect('/');
+            $sale_id=Sale::insertGetId([
+                'shipping_id'=>$shipping_id,
+                'shipping_cost'=>60,
+                'discount'=>0,
+                'transaction_id'=>null,
+                'currency'=>"BDT",
+                'payment_type'=>$request->check_method,
+                'status'=>0,
+                'created_at'=>Carbon::now(),
+            ]);
+            $amount=0;
+            $carts=cart::where('random_number',session('random_number'))->get();
+            foreach($carts as $item){
+                $amount=$amount+($item->price*$item->qty);
+                Billing::insert([
+                        'random_number'=>session('random_number'),
+                         'sale_id'=>$sale_id,
+                         'product_id'=>$item->product_id,
+                         'price'=>$item->price,
+                         'qty'=>$item->qty,
+                ]);
+            }
+            Sale::where('id',$sale_id)->update([
+                'amount'=>$amount+60,
+                'sub_total'=>$amount,
+            ]);
+            cart::where('random_number',session('random_number'))->delete();
+            $data=DB::table('billings')
+                        ->join('allproducts','billings.product_id','=','allproducts.id')
+                        ->select('billings.*','allproducts.name as product_name')
+                        -> where('sale_id', $sale_id)
+                        ->get();
+            $email=Auth::user()->email;
+            Mail::to($email)->send(new OrderMail($data));
+            Toastr::success('order success', 'Success', ["positionClass" => "toast-top-right"]);
+            return redirect('/');
+            }else{
+                $shipping_id= Shipping::insertGetId([
+                    'name'=>$request->name,
+                    'user_id'=>Auth::user()->id,
+                    'email'=>$request->email,
+                    'contact'=>$request->contact,
+                    'address'=>$request->address,
+                    // 'devision'=>$request->division_id,
+                    // 'district'=>$request->district_id,
+                    // 'upazila'=>$request->upazila_id,
+                    'shipping_date'=>$request->shipping_date,
+                    'order_note'=>$request->order_note,
+                    'created_at'=>Carbon::now(),
+            ]);
+            $sale_id=Sale::insertGetId([
+                'shipping_id'=>$shipping_id,
+                'shipping_cost'=>60,
+                'discount'=>0,
+                'transaction_id'=>null,
+                'currency'=>"BDT",
+                'payment_type'=>$request->check_method,
+                'status'=>null,
+                'created_at'=>Carbon::now(),
+            ]);
+            $amount=0;
+            $carts=cart::where('random_number',session('random_number'))->get();
+            foreach($carts as $item){
+                $amount=$amount+($item->price*$item->quantity);
+                Billing::insert([
+                        'random_number'=>session('random_number'),
+                         'sale_id'=>$sale_id,
+                         'product_id'=>$item->product_id,
+                         'price'=>$item->price,
+                         'quantity'=>$item->quantity,
+                ]);
+            }
+            Sale::where('id',$sale_id)->update([
+                'amount'=>$amount+60,
+                'sub_total'=>$amount,
+            ]);
+            session(['saleId'=>$sale_id]);
+            session(['amount'=>$amount+60]);
+            cart::where('random_number',session('random_number'))->delete();
+            return redirect('/stripe');
+            // $data="Email has been send";
+            // $email=Auth::user()->email;
+            // Mail::to($email)->send(new OrderMail($data));
+            // Toastr::success('order success', 'Success', ["positionClass" => "toast-top-right"]);
+            // return redirect('/');
+            }
     }
 }

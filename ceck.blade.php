@@ -34,9 +34,9 @@
                                         <label for="">Devision <span>*</span></label>
                                         <select class="form-control" name="division_id" id="division_id" require>
                                         <option value="">select</option>
-                                        {{-- @foreach($data as $item)
+                                        @foreach($data as $item)
                                             <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach --}}
+                                        @endforeach
                                         </select>
                                     </div>
                                     <div class="col-12 mb-20">
@@ -86,15 +86,15 @@
                                         <tbody>
                                             @foreach($carts as $item)
                                             <tr>
-                                                <td> {{$item->product_name}} <strong> × {{$item->quantity}}</strong></td>
-                                                <td> TK.{{$item->price*$item->quantity}}</td>
+                                                <td> {{$item->product_name}} <strong> × {{$item->qty}}</strong></td>
+                                                <td> TK.{{$item->price*$item->qty}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                                     @php
                                                         $amount=0;
                                                         foreach($carts as $item){
-                                                            $amount=$amount+($item->quantity * $item->price);
+                                                            $amount=$amount+($item->qty * $item->price);
                                                         }
                                                     @endphp
                                         <tfoot>
