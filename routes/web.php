@@ -82,3 +82,4 @@ Route::post('place/the/order', 'CheckoutController@placetheOrder');
 Route::get('stripe', 'StripePaymentController@stripe');
 Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
 // ->name('stripe.post')
+ //jus cheking
