@@ -10,12 +10,15 @@
     "require": {
         "php": "^7.2.5",
         "brian2694/laravel-toastr": "^5.54",
+        "dompdf/dompdf": "^0.8.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
+        "laraveldaily/laravel-charts": "^0.1.25",
+        "spatie/laravel-honeypot": "^2.3",
         "stripe/stripe-php": "^7.54",
         "unisharp/laravel-filemanager": "^2.1"
     },

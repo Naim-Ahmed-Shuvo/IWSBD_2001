@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 Route::get('category/backend/page', 'CategoryController@category');
 Route::get('form', 'CategoryController@form');
 Route::get('table', 'CategoryController@table');
@@ -73,13 +73,36 @@ Route::get('view/cart', 'CartController@view_cart');
 
 
 // checkout
-Route::get('proceed/checkout', 'CheckoutController@proceedToCheckout');
-Route::post('place/the/order', 'CheckoutController@placetheOrder');
+Route::get('/proceed/checkout', 'CheckoutController@proceedToCheckout');
+Route::post('place_order', 'CheckoutController@place_order');
 
 
 // stripe
 
 Route::get('stripe', 'StripePaymentController@stripe');
 Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
-// ->name('stripe.post')
 
+//orders
+Route::get('/pending_orders', 'OrderController@pending_orders');
+Route::get('/confirm_order/{id}', 'OrderController@confirm_order');
+Route::get('/decline_order/{id}', 'OrderController@decline_order');
+Route::get('/complete_orders', 'OrderController@complete_orders');
+Route::get('/view_order_details', 'OrderController@view_order_details');
+Route::get('/decline_orders', 'OrderController@decline_orders');
+
+//stuff management
+Route::get('/manage_stuff', 'UserController@manage_stuff');
+Route::post('/add_users', 'UserController@add_users');
+
+
+//stuff profile
+Route::get('/stuff_profile', 'StuffController@stuff_profile');
+Route::post('/update_stuff_profile', 'StuffController@update_stuff_profile');
+
+
+//shipping method
+Route::get('/shipping_method', 'ShippingMethodController@shipping_method');
+Route::post('/save_shipping_method', 'ShippingMethodController@save_shipping_method');
+Route::get('/edit_shipping/{id}', 'ShippingMethodController@edit_shipping');
+Route::post('/update_shipping_method', 'ShippingMethodController@update_shipping_method');
+Route::get('/delete_shipping/{id}', 'ShippingMethodController@delete_shipping');

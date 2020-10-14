@@ -1,38 +1,42 @@
-{{-- @extends('frontend.master')
+@extends('frontend.master')
 
-@section('content') --}}
-<!DOCTYPE html>
-<html>
-<head>
-    <title> Stripe Payment Gateway </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style type="text/css">
-        .panel-title {
-        display: inline;
-        font-weight: bold;
-        }
-        .display-table {
-            display: table;
-        }
-        .display-tr {
-            display: table-row;
-        }
-        .display-td {
-            display: table-cell;
-            vertical-align: middle;
-            width: 61%;
-        }
-    </style>
-</head>
-<body>
+@section('title', 'Stripe Payment')
 
-<div class="container">
+@push('css')
 
-    <h1> Stripe Payment Gateway </h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<style type="text/css">
+    .panel-title {
+    display: inline;
+    font-weight: bold;
+    }
+    .display-table {
+        display: table;
+    }
+    .display-tr {
+        display: table-row;
+    }
+    .display-td {
+        display: table-cell;
+        vertical-align: middle;
+        width: 61%;
+    }
+</style>
 
-    <div class="row mt-5">
+
+@endpush
+
+
+
+
+
+
+    @section('content')
+
+
+    <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <h1>Stripe Payment Gateway</h1>
             <div class="panel panel-default credit-card-box">
                 <div class="panel-heading display-table" >
                     <div class="row display-tr" >
@@ -103,7 +107,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ({{session('amount')}}/=)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
                             </div>
                         </div>
 
@@ -112,13 +116,14 @@
             </div>
         </div>
     </div>
+    @endsection
 
-</div>
 
-</body>
 
+
+@push('js')
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
 
@@ -175,5 +180,5 @@ $(function() {
 
 });
 </script>
-</html>
-{{-- @endsection --}}
+@endpush
+

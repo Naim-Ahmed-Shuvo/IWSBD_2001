@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{url('/')}}/frontend-assets/css/style.css">
 
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    @stack('css')
 
 </head>
 
@@ -1010,5 +1011,7 @@
 
  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}
+
+@stack('js')
 
 </body>

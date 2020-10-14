@@ -40,24 +40,28 @@
 			<!-- Sidebar Header    -->
 			<div class="sidenav-header d-flex align-items-center justify-content-center">
 				<!-- User Info-->
-				<div class="sidenav-header-inner text-center"><img src="img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
-					<h2 class="h5">Nathan Andrews</h2><span>Web Developer</span>
+				<div class="sidenav-header-inner text-center">
+                    {{-- <img src="img/avatar-7.jpg"  class="img-fluid rounded-circle"> --}}
+					<h2 class="h5">{{Auth::user()->name}}</h2><span>{{Auth::user()->user_type}}</span>
 				</div>
 				<!-- Small Brand information, appears on minimized sidebar-->
 				<div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>B</strong><strong class="text-primary">D</strong></a></div>
 			</div>
 			<!-- Sidebar Navigation Menus-->
 			<div class="main-menu">
-				<h5 class="sidenav-heading">Main</h5>
-				<ul id="side-main-menu" class="side-menu list-unstyled">
+                <h5 class="sidenav-heading">Main</h5>
+
+                {{-- menus for admin --}}
+                @if (Auth::user()->user_type == 'admin')
+                <ul id="side-main-menu" class="side-menu list-unstyled">
 					<!-- <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Manage Category </a>
 						<ul id="exampledropdownDropdown" class="collapse list-unstyled ">
 							<li><a href="#">Niew Category</a></li>
 							<li><a href="#">view Category</a></li>
-							 
+
 						</ul>
 					</li> -->
-					<li><a href="{{url('home')}}"> <i class="icon-form"></i>Home </a></li>
+					<li><a href="{{url('/home')}}"> <i class="icon-form"></i>Dash Board </a></li>
 					<li><a href="{{url('category/backend/page')}}"> <i class="icon-home"></i>Manage Category </a>
 					<li><a href="{{url('subcategory/backend/page')}}"><i class="fas fa-boxes"></i>Sub Category </a>
 					</li>
@@ -65,21 +69,94 @@
 						<ul id="exampledropdownDropdown" class="collapse list-unstyled ">
 							<li><a href="{{url('add/product')}}">Add Product</a></li>
 							<li><a href="{{url('view/product')}}">View Product</a></li>
-							 
+
 						</ul>
 					</li>
 
-					
+
 
 					<li><a href="{{url('add/slider')}}"> <i class="icon-form"></i>Add Slider </a></li>
 					<li><a href="{{url('view/slider')}}"> <i class="fa fa-bar-chart"></i>View Slider </a></li>
-					
-					<li><a href="{{url('backend/contact/us')}}"> <i class="icon-grid"></i>Contact Us </a></li>
-					
-					
-				</ul>
+
+                    <li><a href="{{url('backend/contact/us')}}"> <i class="icon-grid"></i>Contact Us </a></li>
+
+                    <!-- Example split danger button -->
+
+                    <li>
+                        <a href="#exampledropdownDropdown1" aria-expanded="false" data-toggle="collapse"><i class="fas fa-fan"></i> Order Management </a>
+						<ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
+							<li><a class="dropdown-item" href="{{url('/pending_orders')}}">Pending Orders</a></li>
+							<li><a class="dropdown-item" href="{{url('/complete_orders')}}"> Complete Orders</a></li>
+							<li> <a class="dropdown-item" href="{{url('/decline_orders')}}"> Decline Orders</a></li>
+
+						</ul>
+					</li>
+                    <li><a href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"><i class="fas fa-cog"></i> General Settings </a>
+						<ul id="exampledropdownDropdown5" class="collapse list-unstyled ">
+							<li><a class="dropdown-item" href="{{url('/shipping_method')}}">Shipping Method</a></li>
+							<li><a class="dropdown-item" href="{{url('/packaging')}}"> Packaging</a></li>
+							<li> <a class="dropdown-item" href="{{url('/pick_up_location')}}"> Pick Up Location</a></li>
+
+						</ul>
+					</li>
+
+
+					<li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"><i class="fas fa-cog"></i> Home Page Settings </a>
+						<ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
+							<li><a href="{{url('add/product')}}"><i class="fas fa-circle mr-2"></i> Pending Orders</a></li>
+							<li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> Processing Orders</a></li>
+							<li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> Decline Orders</a></li>
+
+						</ul>
+					</li>
+					<li>
+                        <a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"><i class="fas fa-dollar-sign"></i>  Payment Gateways </a>
+						<ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
+							<li><a href="{{url('add/product')}}"><i class="fas fa-circle mr-2"></i> Stripe</a></li>
+							<li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> SSL</a></li>
+							<li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> Bkash</a></li>
+							<li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> Nagad</a></li>
+
+						</ul>
+					</li>
+					<li><a href="{{url('/manage_stuff')}}" aria-expanded="false" ><i class="fas fa-users-cog"></i> Manage Stuff </a>
+
+					</li>
+
+                </ul>
+
+
+                @endif
+
+                {{-- menus for stuff --}}
+
+                @if (Auth::user()->user_type == 'stuff')
+                    <ul id="side-main-menu" class="side-menu list-unstyled">
+                        <li><a href="{{url('/stuff_profile')}}" aria-expanded="false" ><i class="fas fa-users-cog"></i> Stuff Profile</a>
+                        <li>
+                            <a href="#exampledropdownDropdown1" aria-expanded="false" data-toggle="collapse"><i class="fas fa-fan"></i> Order Management </a>
+                            <ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
+                                <li><a class="dropdown-item" href="{{url('/pending_orders')}}">Pending Orders</a></li>
+                                <li><a class="dropdown-item" href="{{url('/complete_orders')}}"> Complete Orders</a></li>
+                                <li> <a class="dropdown-item" href="{{url('/decline_orders')}}"> Decline Orders</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"><i class="fas fa-dollar-sign"></i>  Payment Gateways </a>
+                            <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
+                                <li><a href="{{url('add/product')}}"><i class="fas fa-circle mr-2"></i> Stripe</a></li>
+                                <li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> SSL</a></li>
+                                <li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> Bkash</a></li>
+                                <li><a href="{{url('view/product')}}"><i class="fas fa-circle mr-2"></i> Nagad</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                @endif
 			</div>
-			
+
 		</div>
 	</nav>
 	<div class="page">
@@ -88,17 +165,17 @@
 			<nav class="navbar">
 				<div class="container-fluid">
 					<div class="navbar-holder d-flex align-items-center justify-content-between">
-						<div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
-								<div class="brand-text d-none d-md-inline-block"><span>Bootstrap </span><strong class="text-primary">Dashboard</strong></div>
+						<div class="navbar-header">><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i><a href="{{url('/home')}}" class="navbar-brand">
+								<div class="brand-text d-none d-md-inline-block"><strong class="text-primary">Dashboard</strong></div>
 							</a></div>
 						<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-		
+
 							<!-- Log out-->
 							<li class="nav-item"><a href="login.html" class="nav-link logout">
 								 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Logout') }}<i class="fas fa-sign-out-alt ml-1"></i>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -148,6 +225,8 @@
 	<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}
+
+    @stack('js')
 </body>
 
 </html>

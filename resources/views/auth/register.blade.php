@@ -54,16 +54,26 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span> -->
                     </div>
-                    
+
                       <div class="wrap-input100 validate-input" data-validate = "Password is required">
                         <input class="input100" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                          
+
                         <!-- <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span> -->
                     </div>
-
+                    <div class="form-group row">
+                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">User Type</label>
+                        <div class="col-md-6">
+                            <select class="form-control" name="user_type" required>
+                                <option value="">Select One</option>
+                                <option value="admin">Admin</option>
+                                <option value="stuff">Stuff</option>
+                                <option value="customer">Customer</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="container-login100-form-btn">
 
                          <button type="submit" class="login100-form-btn">

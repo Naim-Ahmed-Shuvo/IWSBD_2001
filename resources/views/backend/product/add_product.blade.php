@@ -25,14 +25,14 @@
 	 						@endforeach
 	 					</select>
 	 				    </div>
-	                   </div>  
-	 			
-	 					
+	                   </div>
+
+
 	 					<div class="col-lg-4">
 	 							<div class="form-group">
 				 					<label>SubCategory </label>
-				 					<select class="form-control" name="subcategory_id" id="subcategory_id" required>
-				 						
+				 					<select class="form-control" name="subcategory_id" id="subcategory_id" >
+
 				 					</select>
 				 				</div>
 	 					</div>
@@ -83,11 +83,11 @@
  				</div>
               <div class="row mt-3">
  					<div class="col-lg-12">
- 						
+
  						<input type="submit" class="btn btn-success rounded" value="Submit">
  					</div>
  				</div>
- 				
+
  			</form>
  		</div>
  	</div>
@@ -97,7 +97,7 @@
 
 
 @section('footer_js')
-  
+
 
   <!-- multiple image -->
 
@@ -134,7 +134,7 @@
       filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
     });
   </script>
-  
+
    <!-- drop-down dependency ajax -->
   <script>
 		$(document).ready(function() {

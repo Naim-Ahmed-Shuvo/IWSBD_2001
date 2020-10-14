@@ -32,11 +32,11 @@ class CartController extends Controller
 
              else{
              	Cart::insert([
-    		'random_number'=>session('random_number'),
-    		'product_id'=>$req->product_id,
-    		'quantity'=>$req->quantity,
-    		'price'=>$data->price,
-    		'created_at'=>Carbon::now()
+            		'random_number'=>session('random_number'),
+            		'product_id'=>$req->product_id,
+            		'quantity'=>$req->quantity,
+            		'price'=>$data->price,
+            		'created_at'=>Carbon::now()
     		    ]);
              }
 

@@ -48,19 +48,24 @@ class CheckoutController extends Controller
     //     $upazilas=upazila::where('district_id',$id)->get();
     //     return response()->json($upazilas);
     // }
-    public function placetheOrder(Request $request){
-            if($request->check_method=="Cash On Delivery"){
-                $shipping_id= Shipping::insertGetId([
-                    'name'=>$request->name,
-                    'user_id'=>Auth::user()->id,
-                    'email'=>$request->email,
-                    'contact'=>$request->contact,
-                    'address'=>$request->address,
 
-                    'shipping_date'=>$request->shipping_date,
-                    'order_note'=>$request->order_note,
-                    'created_at'=>Carbon::now(),
+    public function place_order(Request $request)
+    {
+        if($request->check_method == 'Cash On Delivery'){
+            $shipping_id = Shipping::insertGetId([
+                'name' => $request->name,
+                'user_id' => Auth::user()->id,
+                'email' => $request->email,
+                'phone' =>$request->phone,
+                'address' =>$request->address,
+                'country' =>$request->country,
+                'city' =>$request->city,
+                'shipping_date' =>$request->date,
+                'payment_method' =>$request->check_method,
+                'order_note' =>$request->order_note,
+                'created_at' => Carbon::now(),
             ]);
+
             $sale_id=Sale::insertGetId([
                 'shipping_id'=>$shipping_id,
                 'shipping_cost'=>60,
@@ -71,46 +76,48 @@ class CheckoutController extends Controller
                 'status'=>0,
                 'created_at'=>Carbon::now(),
             ]);
+
             $amount=0;
-            $carts=cart::where('random_number',session('random_number'))->get();
+            $carts = Cart::where('random_number',session('random_number'))->get();
             foreach($carts as $item){
-                $amount=$amount+($item->price*$item->qty);
+                $amount=$amount+($item->price*$item->quantity);
                 Billing::insert([
-                        'random_number'=>session('random_number'),
-                         'sale_id'=>$sale_id,
-                         'product_id'=>$item->product_id,
-                         'price'=>$item->price,
-                         'qty'=>$item->qty,
-                ]);
+                    'random_number'=>session('random_number'),
+                     'sale_id'=>$sale_id,
+                     'product_id'=>$item->product_id,
+                     'price'=> $item->price,
+                     'quantity'=>$item->quantity,
+               ]);
+
             }
-            Sale::where('id',$sale_id)->update([
-                'amount'=>$amount+60,
-                'sub_total'=>$amount,
+
+            Sale::where('id', $sale_id)->update([
+                'amount' => $amount+60,
+                'sub_total' => $amount,
             ]);
-            cart::where('random_number',session('random_number'))->delete();
-            $data=DB::table('billings')
-                        ->join('allproducts','billings.product_id','=','allproducts.id')
-                        ->select('billings.*','allproducts.name as product_name')
-                        -> where('sale_id', $sale_id)
-                        ->get();
-            $email=Auth::user()->email;
-            Mail::to($email)->send(new OrderMail($data));
-            Toastr::success('order success', 'Success', ["positionClass" => "toast-top-right"]);
-            return redirect('/');
-            }else{
-                $shipping_id= Shipping::insertGetId([
-                    'name'=>$request->name,
-                    'user_id'=>Auth::user()->id,
-                    'email'=>$request->email,
-                    'contact'=>$request->contact,
-                    'address'=>$request->address,
-                    // 'devision'=>$request->division_id,
-                    // 'district'=>$request->district_id,
-                    // 'upazila'=>$request->upazila_id,
-                    'shipping_date'=>$request->shipping_date,
-                    'order_note'=>$request->order_note,
-                    'created_at'=>Carbon::now(),
+
+            Cart::where('random_number', session('random_number'))->delete();
+
+             Toastr::success('Order placed successfully', 'Success', ["positionClass" => "toast-top-right"]);
+             return redirect('/');
+
+        }
+
+        else{
+            $shipping_id = Shipping::insertGetId([
+                'name' => $request->name,
+                'user_id' => Auth::user()->id,
+                'email' => $request->email,
+                'phone' =>$request->phone,
+                'address' =>$request->address,
+                'country' =>$request->country,
+                'city' =>$request->city,
+                'shipping_date' =>$request->date,
+                'payment_method' =>$request->check_method,
+                'order_note' =>$request->order_note,
+                'created_at' => Carbon::now(),
             ]);
+
             $sale_id=Sale::insertGetId([
                 'shipping_id'=>$shipping_id,
                 'shipping_cost'=>60,
@@ -118,34 +125,35 @@ class CheckoutController extends Controller
                 'transaction_id'=>null,
                 'currency'=>"BDT",
                 'payment_type'=>$request->check_method,
-                'status'=>null,
+                'status'=>0,
                 'created_at'=>Carbon::now(),
             ]);
+
             $amount=0;
-            $carts=cart::where('random_number',session('random_number'))->get();
+            $carts = Cart::where('random_number',session('random_number'))->get();
             foreach($carts as $item){
                 $amount=$amount+($item->price*$item->quantity);
                 Billing::insert([
-                        'random_number'=>session('random_number'),
-                         'sale_id'=>$sale_id,
-                         'product_id'=>$item->product_id,
-                         'price'=>$item->price,
-                         'quantity'=>$item->quantity,
-                ]);
+                    'random_number'=>session('random_number'),
+                     'sale_id'=>$sale_id,
+                     'product_id'=>$item->product_id,
+                     'price'=> $item->price,
+                     'quantity'=>$item->quantity,
+               ]);
+
             }
-            Sale::where('id',$sale_id)->update([
-                'amount'=>$amount+60,
-                'sub_total'=>$amount,
+
+            Sale::where('id', $sale_id)->update([
+                'amount' => $amount+60,
+                'sub_total' => $amount,
             ]);
-            session(['saleId'=>$sale_id]);
-            session(['amount'=>$amount+60]);
-            cart::where('random_number',session('random_number'))->delete();
-            return redirect('/stripe');
-            // $data="Email has been send";
-            // $email=Auth::user()->email;
-            // Mail::to($email)->send(new OrderMail($data));
-            // Toastr::success('order success', 'Success', ["positionClass" => "toast-top-right"]);
-            // return redirect('/');
-            }
+
+            Cart::where('random_number', session('random_number'))->delete();
+
+            session(['sale_id' => $sale_id]);
+            session(['amount' => $amount+60]);
+             Toastr::success('Order placed successfully', 'Success', ["positionClass" => "toast-top-right"]);
+             return redirect('/stripe');
+        }
     }
 }
